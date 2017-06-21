@@ -30,7 +30,7 @@ class DataParser(object):
         self.df_prior = None
         self.prepare_train_data()
 
-    def prepare_train_data(self , output_name ):
+    def prepare_train_data(self  ):
         reo = '1'
         #names=['order_id' , 'product_id' , 'add_to_cart_order'  , 'reordered' ]
         # ['order_id' , 'user_id' , 'eval_set'  ,'order_number' , 'order_dow' , 'order_hour_of_day' , 'days_since_prior_order']
@@ -44,7 +44,7 @@ class DataParser(object):
         
         order_ids_train = list( set( order_ids_train ) )
         
-        output = "../data/tfrecord/train_set.pb2"
+        output = "./results/train_set.pb2"
         
         #df_prior = pd.read_csv( self.prior_path , dtype = { } )
 
