@@ -192,4 +192,4 @@ class DataParser(object):
 
 
 
-dataparser = DataParser( "../../instacartdata/data")
+dataparser = DataParser( "/home/kaggleun/instacartdata/data")
