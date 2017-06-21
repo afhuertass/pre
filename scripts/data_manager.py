@@ -192,4 +192,4 @@ class DataParser(object):
 
 
 
-dataparser = DataParser( "../data")
+dataparser = DataParser( "../../instacartdata/data")
