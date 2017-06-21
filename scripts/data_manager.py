@@ -13,7 +13,7 @@ import numpy as np
 
 
 
-MAX_LEN = 100
+MAX_LEN = 150
 
 class DataParser(object):
     # convert data to tensorrecords
@@ -48,13 +48,13 @@ class DataParser(object):
         
         #df_prior = pd.read_csv( self.prior_path , dtype = { } )
 
-        print( order_ids_train )
+        
         tot = len(order_ids_train)
         n = 0
         features_train = []
         features_target = []
         features_id = [] 
-        for order_id_train in order_ids_train[:100]:
+        for order_id_train in order_ids_train[:50000]:
             print(  order_id_train   )
             n = n +1 
             user_ids = df_orders[ df_orders['order_id'] == order_id_train   ]
@@ -67,7 +67,7 @@ class DataParser(object):
             orders_id_prior =  orders_id_prior['order_id'].values
             
 
-            size_c = 1e6
+           
             #print("orders_prior")
             #print(orders_id_prior )
             products_train = []
@@ -96,12 +96,12 @@ class DataParser(object):
                 #
             n_products = len( products_train )
             if n_products < MAX_LEN:
-                rest =  100 - n_products # we need to add rest products as ceros
+                rest =  MAX_LEN - n_products # we need to add rest products as ceros
                 
                 for i in np.arange(0 , rest):
                     products_train.append( 0)
             else:
-                # keep just the MAX_LEN
+                # keep just the last  MAX_LEN items
                 products_train = products_train[:-MAX_LEN]
                 
             #print( "products train" )
@@ -109,7 +109,7 @@ class DataParser(object):
             #print( "products target " )
             #print( products_target )
             print("Progress {}/{} , id processed {} ".format( n , tot , order_id_train  ) )
-            print( len( products_train ) ) 
+            
             
             features_train.append( products_train )
             features_target.append( products_target )
@@ -127,10 +127,7 @@ class DataParser(object):
     def instacar_feature(self ,  features , targets , ids  ):
 
         for feature , target , idd in zip(features,targets, ids):
-            print("some lens")
-            print( len(feature) )
-            print( len(target))
-            print( type( idd ) ) 
+           
             yield {
                 'ids': tf.train.Feature(
                     int64_list = tf.train.Int64List( value = [ idd ] )) ,
