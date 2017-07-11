@@ -30,6 +30,8 @@ class DataParser(object):
         self.df_prior = None
         self.prepare_train_data()
 
+
+    
     def prepare_train_data(self  ):
         reo = '1'
         #names=['order_id' , 'product_id' , 'add_to_cart_order'  , 'reordered' ]
