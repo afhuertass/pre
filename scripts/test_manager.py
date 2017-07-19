@@ -46,7 +46,12 @@ class DataParser(object):
         
         order_ids_test = df_orders[ df_orders['eval_set'] == 'test' ]['order_id']
         order_ids_test = order_ids_test.tolist()
-        print(order_ids_test)
+
+        order_ids_test = set( order_ids_test )
+
+        order_ids_test = list( order_ids_test )
+        
+        
         print(len(order_ids_test))
         
         output = "./results/test_set.pb2"
