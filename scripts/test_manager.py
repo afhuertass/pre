@@ -76,13 +76,11 @@ class DataParser(object):
             #print("orders_prior")
             #print(orders_id_prior )
             products_train = []
-            # ikariam1234 
-            # kaggleun@gmail.com
+            # 
+            # 
             
-            products_target = df_train[ df_train['order_id'] == order_id_train]
-            products_target =  products_target[   products_target['reordered'] == 1  ]['product_id']
-            products_target = products_target.tolist()
-            
+           
+            products_target = [ 1 ]
             
             for order_id in orders_id_prior:
                 
