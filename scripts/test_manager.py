@@ -123,7 +123,9 @@ class DataParser(object):
             features_train.append( products_train )
             features_target.append( products_target )
             features_id.append( order_id_train )
-            
+
+
+        print("writing :{} records".format(  len(features_train ) )  )
         self.dataset_tofile(self.instacar_feature( features_train , features_target , features_id ) , output )
 
             #return
