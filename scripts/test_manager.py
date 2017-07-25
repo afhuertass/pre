@@ -10,6 +10,7 @@ import pandas as pd
 import numpy as np
 
 import itertools 
+from random import shuffle
 
 
 
@@ -63,8 +64,11 @@ class DataParser(object):
         n = 0
         features_train = []
         features_target = []
-        features_id = [] 
-        for order_id_train in order_ids_test[:100]:
+        features_id = []
+
+        shuffle( order_ids_test )
+        
+        for order_id_train in order_ids_test[:]:
             #print(  order_id_train   )
             n = n +1 
             user_ids = df_orders[ df_orders['order_id'] == order_id_train   ]
