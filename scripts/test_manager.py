@@ -9,7 +9,7 @@ import tensorflow as tf
 import pandas as pd
 import numpy as np
 
-
+import itertools 
 
 
 
@@ -64,7 +64,7 @@ class DataParser(object):
         features_train = []
         features_target = []
         features_id = [] 
-        for order_id_train in order_ids_test[:1000]:
+        for order_id_train in order_ids_test[:100]:
             #print(  order_id_train   )
             n = n +1 
             user_ids = df_orders[ df_orders['order_id'] == order_id_train   ]
@@ -138,7 +138,7 @@ class DataParser(object):
     
     def instacar_feature(self ,  features , targets , ids  ):
 
-        for feature , target , idd in zip(features,targets, ids):
+        for feature , target , idd in itertools.izip(features,targets, ids):
             print( len(feature) )
             print( len(target) )
             print( idd ) 
