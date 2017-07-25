@@ -52,7 +52,8 @@ class DataParser(object):
         n = 0
         features_train = []
         features_target = []
-        features_id = [] 
+        features_id = []
+        shuffle( order_ids_train )
         for order_id_train in order_ids_train[:]:
             print(  order_id_train   )
             n = n +1 
