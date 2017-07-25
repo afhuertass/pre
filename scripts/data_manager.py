@@ -7,7 +7,7 @@ import tensorflow as tf
 
 import pandas as pd
 import numpy as np
-
+from random import shuffle
 
 
 MAX_LEN = 150
