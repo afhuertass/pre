@@ -1,4 +1,3 @@
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -8,8 +7,6 @@ import tensorflow as tf
 
 import pandas as pd
 import numpy as np
-
-
 
 
 
@@ -56,7 +53,7 @@ class DataParser(object):
         features_train = []
         features_target = []
         features_id = [] 
-        for order_id_train in order_ids_train[:50000]:
+        for order_id_train in order_ids_train[:]:
             print(  order_id_train   )
             n = n +1 
             user_ids = df_orders[ df_orders['order_id'] == order_id_train   ]
@@ -104,7 +101,7 @@ class DataParser(object):
                     products_train.append( 0)
             else:
                 # keep just the last  MAX_LEN items
-                products_train = products_train[:-MAX_LEN]
+                products_train = products_train[-MAX_LEN:]
                 
             #print( "products train" )
             #print( products_train )
