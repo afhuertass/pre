@@ -111,7 +111,7 @@ class DataParser(object):
                     products_train.append( 0)
             else:
                 # keep just the last  MAX_LEN items
-                products_train = products_train[:-MAX_LEN]
+                products_train = products_train[-MAX_LEN:]
                 
             #print( "products train" )
             #print( products_train )
