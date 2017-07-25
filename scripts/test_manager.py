@@ -85,7 +85,7 @@ class DataParser(object):
             # 
             
            
-            products_target = [ 1.0 ]
+            products_target = [ 1 ]
             
             for order_id in orders_id_prior:
                 
@@ -117,6 +117,7 @@ class DataParser(object):
             #print( products_train )
             #print( "products target " )
             #print( products_target )
+            print( len( products_train) )
             print("Progress {}/{} , id processed {} ".format( n , tot , order_id_train  ) )
             
             
