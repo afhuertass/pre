@@ -85,7 +85,7 @@ class DataParser(object):
             # 
             
            
-            products_target = [ 1 ]
+            products_target = [ 1.0 ]
             
             for order_id in orders_id_prior:
                 
@@ -138,7 +138,7 @@ class DataParser(object):
     def instacar_feature(self ,  features , targets , ids  ):
 
         for feature , target , idd in zip(features,targets, ids):
-           
+            print( len(feature) ) 
             yield {
                 'ids': tf.train.Feature(
                     int64_list = tf.train.Int64List( value = [ idd ] )) ,
