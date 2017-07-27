@@ -140,7 +140,7 @@ class DataParser(object):
 
         for feature , target , idd in zip(features,targets, ids):
             n_features = len(features)
-            target = features[n_features -1 ]
+            target_r = features[n_features -1 ]
             
             yield {
                 'ids': tf.train.Feature(
@@ -150,7 +150,7 @@ class DataParser(object):
                     int64_list = tf.train.Int64List( value =  feature[:n_features-1]   ) ) ,
                 
                 'target' : tf.train.Feature(
-                    int64_list = tf.train.Int64List( value =  [ target ]   ) )
+                    int64_list = tf.train.Int64List( value =  [ target_r ]   ) )
                 
             }
         
