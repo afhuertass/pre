@@ -140,18 +140,18 @@ class DataParser(object):
     def instacar_feature(self ,  features , targets , ids  ):
 
         for feature , target , idd in itertools.izip(features,targets, ids):
-            print( len(feature) )
-            print( len(target) )
-            print( idd ) 
+            n_features = len(feature)
+            target_r = feature[n_features -1 ]
+            
             yield {
                 'ids': tf.train.Feature(
                     int64_list = tf.train.Int64List( value = [ idd ] )) ,
                 
                 'feature' : tf.train.Feature(
-                    int64_list = tf.train.Int64List( value =  feature   ) ) ,
+                    int64_list = tf.train.Int64List( value =   feature[:n_features-1]  ) ) ,
                 
                 'target' : tf.train.Feature(
-                    int64_list = tf.train.Int64List( value =  target   ) )
+                    int64_list = tf.train.Int64List( value =  [target_r]   ) )
                 
             }
         
