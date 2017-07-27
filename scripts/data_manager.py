@@ -55,7 +55,7 @@ class DataParser(object):
         features_id = []
         shuffle( order_ids_train )
         
-        for order_id_train in order_ids_train[:]:
+        for order_id_train in order_ids_train[:100]:
             print(  order_id_train   )
             n = n +1 
             user_ids = df_orders[ df_orders['order_id'] == order_id_train   ]
@@ -113,8 +113,6 @@ class DataParser(object):
                 L = products_train[:]
                 L.append( product_target )
                 L.append( 0.0 )
-                
-                print( "number of products:{}".format( len(L) ) )
                 features_train.append( L )
 
                         
@@ -123,7 +121,7 @@ class DataParser(object):
             #print( "products target " )
             #print( products_target )
             print("Progress {}/{} , id processed {} ".format( n , tot , order_id_train  ) )
-            print( "number of products:")
+            
             
             
             features_target.append( products_target )
