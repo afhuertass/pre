@@ -139,8 +139,8 @@ class DataParser(object):
     def instacar_feature(self ,  features , targets , ids  ):
 
         for feature , target , idd in zip(features,targets, ids):
-            n_features = len(features)
-            target_r = features[n_features -1 ]
+            n_features = len(feature)
+            target_r = feature[n_features -1 ]
             
             yield {
                 'ids': tf.train.Feature(
