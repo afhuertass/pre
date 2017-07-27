@@ -104,7 +104,7 @@ class DataParser(object):
                 
                 L = products_train[:]
                 L.append( product_target )
-                L.append( 1.0 )
+                L.append( 1 )
                  
                 features_train.append( L )
 
@@ -112,7 +112,7 @@ class DataParser(object):
                 
                 L = products_train[:]
                 L.append( product_target )
-                L.append( 0.0 )
+                L.append( 0 )
                 features_train.append( L )
 
                         
