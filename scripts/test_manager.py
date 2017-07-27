@@ -106,16 +106,13 @@ class DataParser(object):
 
                 # products_train = products previous
                 #
-            n_products = len( products_train )
-            print( "products in prior orders:{}".format( n_products ))  
-            if n_products < MAX_LEN:
-                rest =  MAX_LEN - n_products # we need to add rest products as ceros
-                
-                for i in np.arange(0 , rest):
-                    products_train.append( 0)
-            else:
-                # keep just the last  MAX_LEN items
-                products_train = products_train[-MAX_LEN:]
+
+            for p in products_train:
+
+                L = products_train[:]
+                L.append( p )
+                L.append( 0 ) # false label
+                features_train.append( L )
                 
             #print( "products train" )
             #print( products_train )
@@ -125,7 +122,7 @@ class DataParser(object):
             print("Progress {}/{} , id processed {} ".format( n , tot , order_id_train  ) )
             
             
-            features_train.append( products_train )
+            
             features_target.append( products_target )
             features_id.append( order_id_train )
 
