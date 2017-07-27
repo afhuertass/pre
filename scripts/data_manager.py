@@ -105,13 +105,15 @@ class DataParser(object):
                 L = products_train[:]
                 L.append( product_target )
                 L.append( 1.0 )
+                print( L) 
                 features_train.append( L )
 
             for product_target in products_target_zero:
                 
                 L = products_train[:]
                 L.append( product_target )
-                L.append( 0.0 ) 
+                L.append( 0.0 )
+                print( L ) 
                 features_train.append( L )
 
                         
@@ -122,7 +124,7 @@ class DataParser(object):
             print("Progress {}/{} , id processed {} ".format( n , tot , order_id_train  ) )
             
             
-            features_train.append( products_train )
+            
             features_target.append( products_target )
             features_id.append( order_id_train )
             
