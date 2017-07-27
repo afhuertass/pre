@@ -54,6 +54,7 @@ class DataParser(object):
         features_target = []
         features_id = []
         shuffle( order_ids_train )
+        
         for order_id_train in order_ids_train[:]:
             print(  order_id_train   )
             n = n +1 
@@ -75,8 +76,11 @@ class DataParser(object):
             # kaggleun@gmail.com
             
             products_target = df_train[ df_train['order_id'] == order_id_train]
-            products_target =  products_target[   products_target['reordered'] == 1  ]['product_id']
-            products_target = products_target.tolist()
+            
+            products_target_one =  products_target[ products_target['reordered'] == 1  ]['product_id']
+            products_target_zero =  products_target[ products_target['reordered'] == 0  ]['product_id']
+            
+            products_target = [ 1 ] # not used
             
             
             for order_id in orders_id_prior:
@@ -94,16 +98,23 @@ class DataParser(object):
 
                 # products_train = products previous
                 #
-            n_products = len( products_train )
-            if n_products < MAX_LEN:
-                rest =  MAX_LEN - n_products # we need to add rest products as ceros
+           
+            
+            for product_target in products_target_one:
                 
-                for i in np.arange(0 , rest):
-                    products_train.append( 0)
-            else:
-                # keep just the last  MAX_LEN items
-                products_train = products_train[-MAX_LEN:]
+                L = products_train[:]
+                L.append( product_target )
+                L.append( 1.0 )
+                features_train.append( L )
+
+            for product_target in products_target_zero:
                 
+                L = products_train[:]
+                L.append( product_target )
+                L.append( 0.0 ) 
+                features_train.append( L )
+
+                        
             #print( "products train" )
             #print( products_train )
             #print( "products target " )
@@ -116,7 +127,7 @@ class DataParser(object):
             features_id.append( order_id_train )
             
         self.dataset_tofile(self.instacar_feature( features_train , features_target , features_id ) , output )
-
+        
             #return
         
         #self.dataset_tofile(self.instacar_feature( products_train , products_target ) , output )
@@ -127,16 +138,18 @@ class DataParser(object):
     def instacar_feature(self ,  features , targets , ids  ):
 
         for feature , target , idd in zip(features,targets, ids):
-           
+            n_features = len(features)
+            target = features[n_features -1 ]
+            
             yield {
                 'ids': tf.train.Feature(
                     int64_list = tf.train.Int64List( value = [ idd ] )) ,
                 
                 'feature' : tf.train.Feature(
-                    int64_list = tf.train.Int64List( value =  feature   ) ) ,
+                    int64_list = tf.train.Int64List( value =  feature[:n_features-1]   ) ) ,
                 
                 'target' : tf.train.Feature(
-                    int64_list = tf.train.Int64List( value =  target   ) )
+                    int64_list = tf.train.Int64List( value =  [ target ]   ) )
                 
             }
         
