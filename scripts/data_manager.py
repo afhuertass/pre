@@ -149,7 +149,7 @@ class DataParser(object):
 
         else:
 
-            L2 = [-150:]
+            L2 = L2[-MAX_LEN:]
 
         return L2
 
