@@ -111,8 +111,10 @@ class DataParser(object):
 
                 L = products_train[:]
                 L.append( p )
-                L.append( 0 ) # false label
+                L = self.pad ( L )
+                features_target.append( 0 ) # false label 
                 features_train.append( L )
+                features_id.append( order_id_train )
                 
             #print( "products train" )
             #print( products_train )
@@ -123,8 +125,8 @@ class DataParser(object):
             
             
             
-            features_target.append( products_target )
-            features_id.append( order_id_train )
+            
+            
 
 
         print("writing :{} records".format(  len(features_train ) )  )
@@ -137,21 +139,35 @@ class DataParser(object):
                 
     # xgboost
     
+    def pad(self , L ):
+        # pad to 150 length
+        l = len( L )
+        L2 = L[:]
+        if l < 150:
+            rest = 150 - l
+            for i in np.arange(0,rest):
+                L2.append(0)
+
+        else:
+
+            L2 = L2[-MAX_LEN:]
+
+        return L2
+    
     def instacar_feature(self ,  features , targets , ids  ):
 
         for feature , target , idd in itertools.izip(features,targets, ids):
-            n_features = len(feature)
-            target_r = feature[n_features -1 ]
+            
             
             yield {
                 'ids': tf.train.Feature(
                     int64_list = tf.train.Int64List( value = [ idd ] )) ,
                 
                 'feature' : tf.train.Feature(
-                    int64_list = tf.train.Int64List( value =   feature[:n_features-1]  ) ) ,
+                    int64_list = tf.train.Int64List( value =   feature ) ) ,
                 
                 'target' : tf.train.Feature(
-                    int64_list = tf.train.Int64List( value =  [target_r]   ) )
+                    int64_list = tf.train.Int64List( value =  [target]   ) )
                 
             }
         
