@@ -123,12 +123,12 @@ class DataParser(object):
             #print( "products target " )
             #print( products_target )
             print("Progress {}/{} , id processed {} ".format( n , tot , order_id_train  ) )
+            print( len( features_train ) )
             
             
             
             
-            
-        print( len( features_train ) )
+        
         self.dataset_tofile(self.instacar_feature( features_train , features_target , features_id ) , output )
         
             #return
