@@ -128,7 +128,7 @@ class DataParser(object):
             
             
             
-            
+        print( len( features_train ) )
         self.dataset_tofile(self.instacar_feature( features_train , features_target , features_id ) , output )
         
             #return
