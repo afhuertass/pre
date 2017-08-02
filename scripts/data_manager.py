@@ -79,7 +79,7 @@ class DataParser(object):
             products_target = df_train[ df_train['order_id'] == order_id_train]
             
             products_target_one =  products_target[ products_target['reordered'] == 1  ]['product_id'].values
-            print(products_target_one )
+            
             
             for order_id in orders_id_prior:
                 
@@ -100,7 +100,7 @@ class DataParser(object):
                 # products_train = products previous
                 #
            
-            if len( products_target_one ) == 0 :
+            if  products_target_one.size == 0 :
                 string_target += "None\n"
 
             else :
