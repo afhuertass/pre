@@ -54,8 +54,9 @@ class DataParser(object):
         features_target = []
         features_id = []
         shuffle( order_ids_train )
-        
-        for order_id_train in order_ids_train[:100000]:
+        string_train = ""
+        string_target = "" 
+        for order_id_train in order_ids_train[:10]:
             print(  order_id_train   )
             n = n +1 
             user_ids = df_orders[ df_orders['order_id'] == order_id_train   ]
@@ -72,7 +73,7 @@ class DataParser(object):
             #print("orders_prior")
             #print(orders_id_prior )
             products_train = []
-            # ikariam1234 
+            # 
             # kaggleun@gmail.com
             
             products_target = df_train[ df_train['order_id'] == order_id_train]
@@ -94,42 +95,41 @@ class DataParser(object):
                 #print( products )
                 #print( products )
                 for p in products:
+                    string_train += str( p ) + " "
+                    
                     products_train.append( p )
-
+                string_train += "\n"
+                
                 # products_train = products previous
                 #
            
-            
-            for product_target in products_target_one:
+            if len( products_target_one ) == 0 :
+                string_target += "None\n"
+
+            else :
                 
-                L = products_train[:]
-                L.append( product_target )
-                L = self.pad( L ) 
-                features_train.append( L )
-                features_target.append( 1 )
-                features_id.append( order_id_train )
-                
-            for product_target in products_target_zero:
-                
-                L = products_train[:]
-                L.append( product_target )
-                L = self.pad( L ) 
-                features_train.append( L )
-                features_target.append( 0 )
-                features_id.append( order_id_train )
-                        
+                for product_target in products_target_one:
+
+                    string_target += str( product_target) +" "
+                string_train += "None\n"
+         
             #print( "products train" )
             #print( products_train )
             #print( "products target " )
             #print( products_target )
             print("Progress {}/{} , id processed {} ".format( n , tot , order_id_train  ) )
-            print( len( features_train ) )
             
             
             
             
-        
-        self.dataset_tofile(self.instacar_feature( features_train , features_target , features_id ) , output )
+        train_file = open("./train_sources.txt" ,'w')
+        source_file = open("./train_targets.txt", 'w')
+
+        train_file.write( string_train)
+        train_file.write( source_file )
+
+            
+        #self.dataset_tofile(self.instacar_feature( features_train , features_target , features_id ) , output )
         
             #return
         
