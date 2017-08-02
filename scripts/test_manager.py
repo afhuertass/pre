@@ -67,7 +67,8 @@ class DataParser(object):
         features_id = []
 
         shuffle( order_ids_test )
-        
+
+        string_sources = ""
         for order_id_train in order_ids_test[:]:
             #print(  order_id_train   )
             n = n +1 
@@ -88,8 +89,6 @@ class DataParser(object):
             # 
             # 
             
-           
-            products_target = [ 1 ]
             
             for order_id in orders_id_prior:
                 
@@ -102,20 +101,13 @@ class DataParser(object):
                 #print( products )
                 #print( products )
                 for p in products:
-                    products_train.append( p )
+                    string_sources += str(p) + " "
 
                 # products_train = products previous
                 #
 
-            for p in products_train:
-
-                L = products_train[:]
-                L.append( p )
-                L = self.pad ( L )
-                features_target.append( 0 ) # false label 
-                features_train.append( L )
-                features_id.append( order_id_train )
-                
+            string_sources +="\n"
+            
             #print( "products train" )
             #print( products_train )
             #print( "products target " )
@@ -126,11 +118,12 @@ class DataParser(object):
             
             
             
-            
+        file_sources = open("./test_source.txt", 'w')
+        file_sources.write(string_sources)
+        file_sources.close()
 
-
-        print("writing :{} records".format(  len(features_train ) )  )
-        self.dataset_tofile(self.instacar_feature( features_train , features_target , features_id ) , output )
+        #print("writing :{} records".format(  len(features_train ) )  )
+        #self.dataset_tofile(self.instacar_feature( features_train , features_target , features_id ) , output )
 
             #return
         
