@@ -69,7 +69,7 @@ class DataParser(object):
         shuffle( order_ids_test )
 
         string_sources = ""
-        for order_id_train in order_ids_test[:]:
+        for order_id_train in order_ids_test[:10]:
             #print(  order_id_train   )
             n = n +1 
             user_ids = df_orders[ df_orders['order_id'] == order_id_train   ]
