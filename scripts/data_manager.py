@@ -126,8 +126,9 @@ class DataParser(object):
         source_file = open("./train_targets.txt", 'w')
 
         train_file.write( string_train)
-        train_file.write( source_file )
-
+        train_file.write( string_target )
+        train_file.close()
+        train_file.close()
             
         #self.dataset_tofile(self.instacar_feature( features_train , features_target , features_id ) , output )
         
