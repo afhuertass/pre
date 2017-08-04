@@ -70,7 +70,7 @@ class DataParser(object):
 
         string_sources = ""
         string_ids = ""
-        for order_id_train in order_ids_test[:10]:
+        for order_id_train in order_ids_test[:]:
             #print(  order_id_train   )
             n = n +1 
             user_ids = df_orders[ df_orders['order_id'] == order_id_train   ]
