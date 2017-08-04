@@ -69,6 +69,7 @@ class DataParser(object):
         shuffle( order_ids_test )
 
         string_sources = ""
+        string_ids = ""
         for order_id_train in order_ids_test[:]:
             #print(  order_id_train   )
             n = n +1 
@@ -89,6 +90,7 @@ class DataParser(object):
             # 
             # 
             
+            string_ids += str(order_id_train) + "\n"
             
             for order_id in orders_id_prior:
                 
@@ -119,9 +121,14 @@ class DataParser(object):
             
             
         file_sources = open("./test_source.txt", 'w')
+        file_ids = open("./test_ids.txt", 'w')
+        
         file_sources.write(string_sources)
         file_sources.close()
 
+
+        file_ids.write( string_ids )
+        file_ids.close()
         #print("writing :{} records".format(  len(features_train ) )  )
         #self.dataset_tofile(self.instacar_feature( features_train , features_target , features_id ) , output )
 
